@@ -1,115 +1,124 @@
 import React from "react";
-import Customer from "./customer-comp/Customer";
-import Table from "@material-ui/core/Table";
-import TableHead from "@material-ui/core/TableHead";
-import TableBody from "@material-ui/core/TableBody";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import ProgressUI from "@material-ui/core/CircularProgress";
-import axios from "axios";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import { fetch_movielist } from "./api/list";
+import { tempItems } from "./constants";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import Study from "./components/Study";
 
-/**
- * props : 하위컴포넌트로 전달하는 값, vue의 v-bind=props와 동일
- * state : 컴포넌트에서 내부적으로 처리하는 변수 저장, vue 의 data와 동일
- * props : 부모에서 사용된 태그 내의 값을 전달, vue의 slot?? 과 동일
- *
- * 라이프사이클
- * 
- * constructor()
- * 
- * componentWillMount()
- * 
- * render() 
- * 
- * componentDidMount : 컴포넌트의 마운트가 완료되었을때, vue의 mounted훅과 동일
- *
- * shouldComponentUpdate() : props, state 변경시
- */
 
-class App extends React.Component {
-  state = {
 
-    completed: 0,
-    apidata: null,
+export default class App extends React.Component {
 
-    items: [
-      {
-        id: 1,
-        image: "https://placeimg.com/64/64/1",
-        name: "name1",
-        birthday: "19921218",
-        gender: "Male",
-        job: "job1"
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      search:{
+        query: "",
+        display: 10,
+        genre: "",
+        yearfrom: "",
+        yearto: "",
       },
-      {
-        id: 2,
-        image: "https://placeimg.com/64/64/2",
-        name: "name2",
-        birthday: "11921218",
-        gender: "Male",
-        job: "job2"
-      }
-    ],
+      items: tempItems
+    };
+  }
 
+  fetchMovieList = async () => {
+    const _query=this.state.search.query;
 
+    await fetch_movielist(_query);
   };
 
-  progress=()=>{
-    const { completed }=this.state;
-    this.setState({ completed: (completed>=100 ? 0 : completed+1) })
-  }
+  changeHandler = (e) => {
+    this.setState({
+      search: {
+        query: e.target.value
+      }
+    });
+  };
+  changeHandler2 = (e) => {
+    this.setState({
+      search: {
+        display: e.target.value
+      }
+    });
+  };
+  changeHandler3 = (e) => {
+    this.setState({
+      search: {
+        genre: e.target.value
+      }
+    });
 
-  componentDidMount(){
-    let _timer=setInterval(this.progress, 20);
-    
-    console.log(_timer)
-    this.callApi()
-    .then(response=>{
-      this.setState({ apidata: response.data });
+  };
+  changeHandler4 = (e) => {
+    this.setState({
+      search: {
+        yearfrom: e.target.value
+      }
+    });
+  };
+  changeHandler5 = (e) => {
+    this.setState({
+      search: {
+        yearto: e.target.value
+      }
+    });
+  };
+ 
+  
+  applySearchResult=()=>{
+
+ 
+
+    return this.state.items.map((item, id)=>{
+      return (
+        <div key={id} className="col-sm-4">
+          
+          <h3>
+            title : {item.title} ({item.subtitle})
+          </h3>
+          <img src={item.image} width="100" height="80" alt="iamges"></img>
+          <p>감독 : {item.director}</p>
+          <p>출시 년도 : {item.pubDate}</p>
+        </div>
+      );
     })
   }
-  
-  callApi = async() =>{
-    const response = await axios.get("https://api.hnpwa.com/v0/news/1.json");
 
-    return response
-  }
-
-  
-  
 
   render() {
+    
     return (
-      <div>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>번호</TableCell>
-              <TableCell>이미지</TableCell>
-              <TableCell>이름</TableCell>
-              <TableCell>생일</TableCell>
-              <TableCell>성별</TableCell>
-              <TableCell>직업</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.state.items.map((item, id) => (
-              <Customer userInfo={item} key={id}></Customer>
-            ))}
-          </TableBody>
-        </Table>
+      <div className="App">
+        <Study></Study>
+        {/* <h1>Search</h1>
+        검색어
+        <input type="text" onChange={this.changeHandler}></input>
+        최대 출력건수
+        <input type="text" onChange={this.changeHandler2}></input>
+        검색 시작위치
+        <input type="text" onChange={this.changeHandler3}></input>
+        년도 시작
+        <input type="text" onChange={this.changeHandler4}></input>
+        년도 끝
+        <input type="text" onChange={this.changeHandler5}></input>
+      
+        <button onClick={this.fetchMovieList}>검색</button>
 
-        <div>
-          {(this.state.apidata === null ?
-           "...." : 
-           this.state.apidata.map(item => <p>{item.id}</p>)
-          )}
-        </div>
-        {this.state.completed}
-        <ProgressUI></ProgressUI>
+        <br></br>
+        <br></br>
+        <br></br>
+        <div className="row">
+          {this.applySearchResult()}
+        </div> */}
+   
+       
       </div>
     );
   }
 }
-
-export default App;
