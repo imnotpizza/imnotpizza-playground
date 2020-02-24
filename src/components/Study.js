@@ -1,55 +1,68 @@
-import React from 'react';
-import {Fragment, Component} from 'react'
-import StudyChild from "./StudyChild"
-import Counter from "./Counter"
+import React, { useEffect } from "react";
+import { useState, Fragment, Component, useMemo, useCallback } from "react";
+import StudyChild from "./StudyChild";
 
-// function Study(){
-//     const name="REACT"
+const getAverage = numbers => {
+  console.log("평균값 계산중");
 
-//     const style={
-//         backgroundColor: 'black',
-//         color: 'aqua',
-//         fontSize: 48,
-//         padding: 16
-//     }
-    
-//     return(
-//         <>
-//             <div style={style}>{name}</div>
-//             <input></input>
-//         </>
-//     )
+  if (numbers.length === 0) {
+    return 0;
+  }
+  const sum = numbers.reduce((a, b) => a + b);
+
+  return sum / numbers.length;
+};
+
+const Study = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState("");
+
+  // //입력 값 바인딩
+  // const onChange=e=>{
+  //   setNumber(e.target.value);
+  // }
+
+  const onChange = useCallback(e => {
+    setNumber(e.target.value);
+  }, []);
+
+  const onInsert = useCallback(() => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+  }, [number, list]);
 
 
-// }
-/**
- * 
- *  const name = "REACT";
+  // //리스트에 값 추가
+  // const onInsert=e=>{
+  //   const nextList=list.concat(parseInt(number));
+  //   setList(nextList);
+  //   setNumber('');
+  // }
 
-          const style = { 스타일 부여
-            backgroundColor: "black",
-            color: "aqua",
-            fontSize: 48,
-            padding: 16
-          };
+  const getList = () => {
+    return list.map((value, id) => <li key={id}>{value}</li>);
+  };
 
-        return <StudyChild name={"value from props"}>value from children</StudyChild> props, children 적용
- */
+  const avg = useMemo(() => getAverage(list), [list]); //list의 값이 수정될 때만 getAverage()로직 수행
 
-class Study extends Component{
-    constructor(props){
-        super(props);
-
-        this.state={number: 0};
-    }
-
-    render(){
-        const {number}=this.state;
-
-        return(
-          <Counter></Counter>
-        )
-    }
-}
+  return (
+    <div>
+      <input value={number} onChange={onChange}></input>
+      <button onClick={onInsert}>등록</button>
+      <br></br>
+      <br></br>
+      <ul>
+        {list.map((value, id) => (
+          <li key={id}>{value}</li>
+        ))}
+      </ul>
+      <br></br>
+      <br></br>
+      <b>평균값 : </b>
+      {avg}
+    </div>
+  );
+};
 
 export default Study;

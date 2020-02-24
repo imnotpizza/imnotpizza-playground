@@ -25,7 +25,13 @@ class Counter extends Component{
         <button
          
           onClick={()=>{
-              this.setState({number: number+1})
+              //this.setState({number: number+1})
+              
+              this.setState(prevState=>{
+                return{
+                  number: prevState.number+1
+                }
+              })
           }}
             
         >+1</button>
