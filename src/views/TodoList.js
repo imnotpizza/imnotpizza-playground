@@ -2,7 +2,7 @@ import React from 'react';
 import TodoListItem from './TodoListItem';
 import '../sass/TodoList.scss'
 
-const TodoList=({items})=>{
+const TodoList=({items, onRemove, onToggle})=>{
 
     
     return (
@@ -12,6 +12,8 @@ const TodoList=({items})=>{
                 <TodoListItem
                 item={item}//todo에 item 내려줌
                 key={item.id}//key 지정
+                onRemove={onRemove}
+                onToggle={onToggle}
                 ></TodoListItem>
             ))
             }

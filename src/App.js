@@ -25,24 +25,38 @@ const App=()=>{
 
   const nextId=useRef(4);
 //글 추가 로직
-  const onInsert=useCallback(
-    text=>{
+  const onInsert=useCallback(text=>{
       const item={
         id: nextId.current,
         text,
         checked: false,
       }
       
-      setItems(items.concat(item))
+      setItems(items => items.concat(item));
       nextId.current+=1;
     },
-    [items],
+    [],
+  )
+
+  const onRemove=useCallback(id=>{
+    setItems(items=>items.filter(item=>item.id!==id));
+    }
+  )
+
+  const onToggle=useCallback(
+    id=>{
+      setItems(items=>
+        items.map(item=>
+            item.id===id ? {...item, checked: !item.checked} : item,
+          ),
+      )
+    }
   )
 
   return(
     <TodoTemplate>
       <TodoInsert onInsert={onInsert}></TodoInsert>
-      <TodoList items={items}></TodoList>
+      <TodoList items={items} onRemove={onRemove} onToggle={onToggle}></TodoList>
     </TodoTemplate>
   )
 }
