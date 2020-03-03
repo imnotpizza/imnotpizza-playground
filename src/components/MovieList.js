@@ -7,21 +7,21 @@ import { tempItems } from "../constants";
 
 
 const MovieList=()=>{
-    const [items, setItems]=useState(tempItems);
-    
-    // useEffect(()=>{
-       
-    //     const fetchData=async()=>{
-    //         const response=await fetch_movielist();
+    const [items, setItems]=useState([]);
 
-    //         console.log(response)
-    //     }
+    useEffect(()=>{
 
-    //     fetchData();
-    
-    // }, [])
-
+      console.log("useeffect")
+      
+      fetch_movielist()
+      .then(response=>{
+        
+        setItems(response)
+      })
+    },[])
+   
     const itemList=()=>{
+     
         return items.map((item, id)=>{
             return (
           

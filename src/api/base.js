@@ -2,7 +2,7 @@ import axios from "axios";
 import { X_NAVER_CLIENT_ID ,  X_NAVER_CLIENT_SECRET} from "../constants";
 
 export default {
-  BASE_URL: "https://openapi.naver.com/v1/search/",
+  BASE_URL: "http://localhost:3000/api/",
 
   get(path) {
     const header = {

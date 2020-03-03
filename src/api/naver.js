@@ -1,10 +1,9 @@
 import base from "./base";
 
 export const fetch_movielist = query => {
-  base
-    .get(`movie.json`)
+  return base.get('movie')
     .then(response => {
-      console.log(response.data.items);
+      return response;
     })
     .catch(err => {
       console.log(err);
