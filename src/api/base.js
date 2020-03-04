@@ -5,15 +5,7 @@ export default {
   BASE_URL: "https://openapi.naver.com/v1/search/",
 
   get(path) {
-    const header = {
-      headers: {
-        X_Naver_Client_Id: X_NAVER_CLIENT_ID,
-        X_Naver_Client_Secret: X_NAVER_CLIENT_SECRET,
-        
-      }
-    };
-
-    return axios.get(this.BASE_URL+path, header);
+    return axios.get(this.BASE_URL+path);
   },
 
   post(path, data) {

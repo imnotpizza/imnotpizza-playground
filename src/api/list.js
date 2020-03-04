@@ -10,3 +10,4 @@ export const fetch_movielist=(query)=>{
         console.log(err)
     })
 }
+
