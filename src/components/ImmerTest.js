@@ -9,7 +9,7 @@
          uselessValue: null,
      })
 
-     //데이터 수정시 이벤트
+    //데이터 처리시 어떻게 해야하는 지를 설명하고 있다.
      const onChange=useCallback(e=>{
         //  //name, value 가져옴
         // //데이터 수정
