@@ -1,57 +1,37 @@
-import React from "react";
-import Study from "./components/Study";
-import ScrollBox from "./components/ScrollBox";
-import MovieList from "./components/MovieList";
-import SearchView from "./components/SearchView";
-import Hooks from "./components/Hooks"
-import { render } from "react-dom";
+import React, { useState, useCallback } from "react";
+import axios from 'axios';
+import NewsList from './components/NewsList'
+import Categories from './components/Categories'
 
 
-export default class App extends React.Component {
+ const App=()=>{
+   const [data, setData]=useState(null);
 
-  state={
-    password: "",
-    clicked: false,
-    validatd: false,
-  }
+   const onClick=async()=>{
+     try{
+       const URL ='http://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=aecdff199bcf42e6b37dd7a9a811a483'
 
-  input=React.createRef();
+      const response=await axios.get(URL);
 
-  handleFocus=()=>{
-    this.input.current.focus();
-  }
-
-  handleChange=(e)=>{
-    this.setState({
-      password: e.target.value
-    })
-  }
-
-  handleButtonClick=()=>{
-    this.setState({
-      clicked: true,
-      validated: this.state.password==='0000'
-    })
-
-    
-  }
-
-  getVldResult=()=>{
-
-  }
-
-  render(){
-    return(
-      <div>
-        <SearchView></SearchView>
-        <MovieList></MovieList>
-        <Hooks></Hooks>
-         
-
-      </div>
-    )
-  }
+      setData(response.data);
 
 
+     }catch(e){
+      console.log(e);
+     }
+   }
 
-}
+   return(
+     <div>
+       {/* <div>
+         <button onClick={onClick}>불러오기</button>
+       </div>
+       {data && <textarea rows={8} cols={200} value={JSON.stringify(data, null, 2)} readOnly={true}></textarea>} */}
+
+       <NewsList></NewsList>
+     </div>
+   )
+ }
+
+
+export default App;
