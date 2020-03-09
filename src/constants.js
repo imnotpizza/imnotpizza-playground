@@ -2,6 +2,8 @@ export const X_NAVER_CLIENT_ID = "n0_0KcWBhI6j6VZH62xB";
 
 export const X_NAVER_CLIENT_SECRET = "aaTUtodscb";
 
+export const BASEURL = "http://localhost:3000/api"
+
 export const tempItems = [
            {
              title: "<b>아이언맨</b>",

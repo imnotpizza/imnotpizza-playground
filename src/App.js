@@ -5,7 +5,20 @@ import MovieList from "./components/MovieList";
 import SearchView from "./components/SearchView";
 import Hooks from "./components/Hooks"
 import { render } from "react-dom";
+import "./sass/movieList.scss";
 
+
+
+/**
+ * 
+ * App
+ * -MovieSearch
+ * -MovieList - MovieItem
+ * 
+ * 
+ * 
+ * 
+ */
 
 export default class App extends React.Component {
 
@@ -43,9 +56,12 @@ export default class App extends React.Component {
   render(){
     return(
       <div>
+       
+
         <SearchView></SearchView>
+        <br></br>
         <MovieList></MovieList>
-        <Hooks></Hooks>
+        <br></br>
          
 
       </div>

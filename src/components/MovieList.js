@@ -4,27 +4,18 @@ import MovieItem from './MovieItem';
 import { fetch_movielist } from "../api/naver";
 import Axios from "axios";
 import { tempItems } from "../constants";
+import '../sass/movieList.scss';
 
 
 const MovieList=()=>{
     const [items, setItems]=useState(tempItems);
     
-    // useEffect(()=>{
-       
-    //     const fetchData=async()=>{
-    //         const response=await fetch_movielist();
 
-    //         console.log(response)
-    //     }
-
-    //     fetchData();
-    
-    // }, [])
 
     const itemList=()=>{
         return items.map((item, id)=>{
             return (
-          
+            
                 <div key={id}>
                   <MovieItem movieItem={item}></MovieItem>
                 </div>
@@ -34,10 +25,20 @@ const MovieList=()=>{
     }
     
     return (
-      <>
+      <div className="container">
         <h1>Movie LIst</h1>
-        {itemList()}
-      </>
+        <div class="col-4">
+          A
+        </div>
+        <div class="col-4">
+          B
+        </div>
+        <div class="col-4">
+          C
+        </div>
+
+       
+      </div>
     );
 
     

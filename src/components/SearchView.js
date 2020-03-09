@@ -1,18 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useCallback} from "react";
+import { fetch_movielist } from '../api/list';
+import common from '../util/common';
 
 const SearchView=()=>{
 
     const [query, setQuery]=useState('');
-    const [options, setOptions]=useState([]);
+    //const [options, setOptions]=useState([]);
 
-    const onChange=(e)=>{
-        setQuery(e.target.value)
-    }
+    const onChange=useCallback(e=>{
+        setQuery(e.target.value);
+    },[query])
 
-    const onClick=(e)=>{
-
-    }
-
+    const onClick=useCallback(async (e)=>{
+       
+        const response=await fetch_movielist(query);//객체 넣어야 함
+      
+    })
 
     return(
         <div>

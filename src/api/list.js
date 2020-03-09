@@ -1,10 +1,11 @@
 import base from './base';
-
+import { BASEURL } from '../constants'
 
 export const fetch_movielist=(query)=>{
-    base.get(`movie.json`)
+    return base.post(`/movie?query=${query}`)
     .then(response=>{
-        console.log(response.data.items);
+    
+        return response;
     })
     .catch(err=>{
         console.log(err)

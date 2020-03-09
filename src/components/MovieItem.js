@@ -1,5 +1,6 @@
 import React, {  } from "react";
 import { tempItems } from "../constants";
+import '../sass/movieItem.scss'
 
 
 
