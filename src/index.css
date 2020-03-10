@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.toggle{
+  border: 2px solid black;
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  box-sizing: border-box;
+}
+
+.toggle.active {
+  background: yellow;
+}
