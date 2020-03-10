@@ -1,6 +1,7 @@
 import React, {useState, useCallback} from "react";
 import { fetch_movielist } from '../api/list';
 import common from '../util/common';
+import '../sass/searchView.scss'
 
 const SearchView=()=>{
 

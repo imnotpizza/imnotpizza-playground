@@ -13,7 +13,8 @@ import "./sass/movieList.scss";
  * 
  * App
  * -MovieSearch
- * -MovieList - MovieItem
+ * -MovieList - MovieItem - MovieDetail
+ * -MovieFooter
  * 
  * 
  * 
