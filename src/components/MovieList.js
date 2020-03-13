@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MovieItem from './MovieItem';
 import Grid from "@material-ui/core/Grid";
 import { tempItems } from "../constants";
@@ -22,20 +22,24 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MovieList=()=>{
-    const [items, setItems]=useState(tempItems);
+    const [items, setItems]=useState(tempItems);//state 로 적용해야 함
     const [visible, setVisible] = useState(false);
 
     const classes=useStyles();
     
 
-    const openModal = () => {
-      setVisible(true);
+    const openModal = (e) => {
+      e.preventDefault();
+      setVisible(true); 
     };
 
     const clsoeModal = () => {
       setVisible(false);
     };
+    
+  
 
+    //아이템리스트 반환
     const itemList=()=>{
       return items.map((item, id)=>{
         return (
@@ -53,11 +57,9 @@ const MovieList=()=>{
         <Grid container spacing={10}>
           {itemList()}
         </Grid>
-        <button onClick={openModal()}>팝업테스트</button>
+        <button onClick={openModal}>팝업테스트</button>
+      
 
-        <section>
-          <h1>React-Modal Examples</h1>
-        </section>
       </div>
     );
 

@@ -2,73 +2,60 @@ import React from "react";
 import Study from "./components/Study";
 import ScrollBox from "./components/ScrollBox";
 import MovieList from "./components/MovieList";
-import SearchView from "./components/SearchView";
-import Hooks from "./components/Hooks"
+import MovieSearch from "./components/MovieSearch";
+import Hooks from "./components/Hooks";
 import { render } from "react-dom";
 import "./sass/movieList.scss";
 
-
-
 /**
- * 
+ *
  * App
  * -MovieSearch
  * -MovieList - MovieItem - MovieDetail
  * -MovieFooter
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 
 export default class App extends React.Component {
-
-  state={
+  state = {
     password: "",
     clicked: false,
-    validatd: false,
-  }
+    validatd: false
+  };
 
-  input=React.createRef();
+  input = React.createRef();
 
-  handleFocus=()=>{
+  handleFocus = () => {
     this.input.current.focus();
-  }
+  };
 
-  handleChange=(e)=>{
+  handleChange = e => {
     this.setState({
       password: e.target.value
-    })
-  }
+    });
+  };
 
-  handleButtonClick=()=>{
+  handleButtonClick = () => {
     this.setState({
       clicked: true,
-      validated: this.state.password==='0000'
-    })
+      validated: this.state.password === "0000"
+    });
+  };
 
-    
-  }
+  getVldResult = () => {};
 
-  getVldResult=()=>{
-
-  }
-
-  render(){
-    return(
+  render() {
+    return (
       <div>
-       
-
-        <SearchView></SearchView>
+        <MovieSearch></MovieSearch>
         <br></br>
         <MovieList></MovieList>
         <br></br>
          
-
       </div>
-    )
+    );
   }
-
-
-
 }

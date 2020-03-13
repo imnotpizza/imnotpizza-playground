@@ -1,49 +1,55 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { tempItems } from "../constants";
 import Modal from "react-awesome-modal";
 import "../sass/movieItem.scss";
+import { getDefaultLibFileName } from "typescript";
 
-const MovieItem = ({ movieItem }) => {
+const MovieDetail = ({ movieItem }) => {
  
-   const [visible, setVisible]=useState(false);
+  const [item, setItem]=useState({});
 
-   const openModal=()=>{
-       setVisible(true);
-   }
-   
-   const clsoeModal=()=>{
-       setVisible(false);
-   }
+ 
 
-    
-   const getRating = rating => {
-     return Math.ceil(rating) / 2;
-   };
+  //평점 계산
+  const getRating = rating => {
+    return Math.ceil(rating) / 2;
+  };
 
-   const getActorsList=(text)=>{
+  //배우 목록 반환
+  const getActorsList=(text)=>{
     let _arr=text.split('|');
     _arr.pop();
     
     return _arr.join(', ');
-   }
+  };
+
+  // const getDetails=()=>{
+  //   return(
+  //    <>
+  //       <h1>Title</h1>
+  //       <h3>제목 : {movieItem.title}</h3>
+  //       <img src={movieItem.image} alt="img"></img>
+  //       <h5>평점 : {movieItem.userRating}</h5>
+  //       <h5>개봉년도 : {movieItem.userRating}</h5>
+  //       <h5>감독 : {movieItem.userRating}</h5>
+  //       <h5>배우 : {movieItem.userRating}</h5>
+  //    </>
+  //   )
+  // };
+
+
+ 
 
   return (
-    <section>
-      <h1>React-Modal Examples</h1>
-    </section>
 
-    // <div className="col-sm-4">
-    //   <h3>제목 : {movieItem.title}</h3>
-    //   <img src={movieItem.image} alt="img"></img>
-    //   <h5>평점 : {movieItem.userRating}</h5>
-    //   <h5>개봉년도 : {movieItem.userRating}</h5>
-    //   <h5>감독 : {movieItem.userRating}</h5>
-    //   <h5>배우 : {movieItem.userRating}</h5>
-    //   <button>영화 상세정보</button>
+    <>
+      popup
+    </>
+    
 
-    //   <hr></hr>
-    // </div>
+
+    
   );
 };
 
-export default MovieItem;
+export default MovieDetail;
