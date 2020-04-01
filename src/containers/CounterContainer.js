@@ -109,3 +109,14 @@ export default CounterContainer;
 //     mapDispatchToProps,
 // )(CounterContainer);//타깃 컴포넌트
 
+/**
+ * 
+ * initialState : 상태의 초기값
+ * 
+ * action: 상태의 변화 실행 부분
+ * 
+ * dispatch : action 실행
+ * 
+ * reducer : 
+ * 
+ */
