@@ -1,11 +1,14 @@
 import AppLayout from '@/components/AppLayout';
 import Router from './router/router';
+import { NuqsAdapter } from 'nuqs/adapters/react';
 
 function App() {
   return (
-    <AppLayout>
-      <Router />
-    </AppLayout>
+    <NuqsAdapter>
+      <AppLayout>
+        <Router />
+      </AppLayout>
+    </NuqsAdapter>
   );
 }
 
